@@ -4,7 +4,9 @@ public class MandelbrotView: UIView {
     public var complexRect: ComplexRect = ComplexRect(c1: Complex(-2.1, 1.5), c2: Complex(1.0, -1.5))
     public var divergenceCondition = { (z z: Complex) -> Bool in return abs2(z) > 2.0*2.0 }
     public var mandelbrotSetColor: UIColor = UIColor.blackColor()
-    
+    public var polynomial = { (z: Complex, c: Complex) -> Complex in
+        return z*z + c
+    }
     let block: Double // pick a value from 0.25 to 5.0 if block is 0.5
     let N: Int //number of iteration
     let rectScale: Double = 1.0
@@ -34,7 +36,7 @@ public class MandelbrotView: UIView {
         // z_0 = 0
         var z = Complex()
         for k in 1...N {
-            z = z*z + c
+            z = self.polynomial(z, c)
             guard !self.divergenceCondition(z: z) else {
                 return self.colorSet[k] //z will diverge
             }

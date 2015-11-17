@@ -38,7 +38,6 @@ public class JuliaView: UIView {
         // z_0 = 0
         var z = z0
         for k in 1...N {
-            //z = z*z + self.Const
             z = self.polynomial(z)
             guard !self.divergenceCondition(z) else {
                 return self.colorSet[k] //z will diverge
