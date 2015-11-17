@@ -2,13 +2,15 @@ import Cocoa
 
 public class JuliaView: NSView {
     public var complexRect = ComplexRect(c1: Complex(-1.5, -1.5), c2: Complex(1.5, 1.5))
-    public var divergenceCondition = { (z: Complex) -> Bool in return abs2(z) > 2.0*2.0 }
-    public var Const = Complex(-0.37, -0.612)
+    public var divergenceCondition = { (z: Complex) -> Bool in return abs2(z) > 2 }
     public var mandelbrotSetColor: NSColor = NSColor.blackColor()
+    public var polynomial = { (z: Complex) -> Complex in
+        return z*z + Complex(-0.63, -0.407)
+    }
     
     let block: Double // pick a value from 0.25 to 5.0 if block is 0.5
     let N: Int //number of iteration
-    let rectScale: Double = 1.0
+    let rectScale: Double = 1
     let colorSet : [NSColor]
     
     //MARK: - life cycle
@@ -36,7 +38,8 @@ public class JuliaView: NSView {
         // z_0 = 0
         var z = z0
         for k in 1...N {
-            z = z*z + self.Const
+            //z = z*z + self.Const
+            z = self.polynomial(z)
             guard !self.divergenceCondition(z) else {
                 return self.colorSet[k] //z will diverge
             }

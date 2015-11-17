@@ -10,7 +10,7 @@ public struct ComplexRect: Equatable, CustomStringConvertible {
     private(set) var topRight: Complex
     public init(c1: Complex, c2: Complex) {
         let left = min(c1.real, c2.real), right = max(c1.real, c2.real)
-        let top = max(c1.imaginary, c2.imaginary), bottom = min(c1.imaginary, c2.imaginary)
+        let top = max(c1.imag, c2.imag), bottom = min(c1.imag, c2.imag)
         topLeft = Complex(left, top)
         bottomRight = Complex(right, bottom)
         bottomLeft = Complex(left, bottom)
