@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /**
  Rectangle containing specified two complex numbers on Gaussian plane.
